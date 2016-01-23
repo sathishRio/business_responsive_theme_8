@@ -1,0 +1,35 @@
+global-css:
+  css:
+    theme:
+      css/style.css: {}
+      css/media.css: {}
+      css/colors.css: {}
+
+custom:
+  js:
+    js/custom.js: {}
+  dependencies:
+        - core/jquery
+        - core/jquery.once
+        - core/drupal
+
+slider:
+  js:
+    js/slider.js: {}
+
+nivo-slider:
+  css:
+    theme:
+      css/nivo-slider.css: {}
+  js:
+    js/jquery.nivo.slider.js: {}
+
+color.preview:
+  version: VERSION
+  css:
+    theme:
+      color/preview.css: {}
+  js:
+    color/preview.js: {}
+  dependencies:
+    - color/drupal.color

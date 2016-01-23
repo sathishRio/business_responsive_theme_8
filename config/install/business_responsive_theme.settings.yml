@@ -1,0 +1,17 @@
+breadcrumbs: '1'
+social_links: '1'
+twitter_username: 'sathish'
+facebook_username: 'sathish.sam.980'
+slideshow_display: '1'
+slideshow_js: '1'
+effect: 'random'
+animSpeed: '2000'
+pauseTime: '3000'
+slices: 15
+boxRows: 4
+boxCols: 8
+startSlide: 0
+controlNav: true
+directionNav: true
+randomStart: false
+pauseOnHover: true

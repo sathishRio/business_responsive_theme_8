@@ -1,0 +1,38 @@
+/* ---------- Color Module Styles ----------- */
+  #header {
+    background-color: #ffffff;
+  }
+  body {
+    color: #515F5C;
+    background: #fff;
+  }
+  a {
+    color: #FF5C03;
+    text-decoration:none;
+  }
+  #container{
+    background-color:#fbfbfb;
+  }
+  #main-menu{
+    background: #272727;
+  }
+  #footer_wrapper {
+    background: #000000;
+  }
+  .footer_credit{
+    background: #000;
+  }
+
+/* ---------- Color Form ----------- */
+
+[dir="rtl"] .color-form .color-palette {
+  margin-left: 0;
+  margin-right: 20px;
+}
+[dir="rtl"] .color-form .form-item label {
+  float: right;
+}
+[dir="rtl"] .color-form .color-palette .lock {
+  right: -20px;
+  left: 0;
+}

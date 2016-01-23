@@ -1,0 +1,74 @@
+/* ---------- Preview Styles ----------- */
+
+.color-preview{
+  color: #515F5C;
+  background: #fff;
+  width: 700px;
+  border: 1px solid;
+}
+.color-preview a{
+  color: #FF5C03;
+  text-decoration:none;
+}
+.color-preview a:hover{
+  color:#E6580A;
+}
+.color-preview .color-preview-header{
+  background-color: #ffffff;
+  display: block;
+  height: 50px;
+}
+.color-preview-logo{
+  float: left;
+}
+.color-preview-site-information{
+  float: left;
+  width: 350px;
+}
+.color-preview .color-preview-social-icons{
+  float: right;
+}
+.color-preview .color-preview-social-icons ul li{
+  display: inline-block;
+  margin-right: 10px;
+}
+.color-preview-main-menu{
+  width: 100%;
+  background: none repeat scroll 0 0 #272727;
+}
+.color-preview-main-menu ul.menu li{
+  display: inline-block;
+  padding: 5px;
+  color: #FFF;
+}
+.color-preview-main-menu ul.menu li.is-active{
+  background: #FB5A02 none repeat scroll 0px 0px;
+}
+.color-preview-main-menu ul.menu li:hover{
+  background: #FB5A02 none repeat scroll 0px 0px;
+}
+.color-preview-sidebar-first{
+  width: 200px;
+  float: left;
+}
+.color-preview-content-block{
+  background-color: #fbfbfb;
+  width: 100%;
+  display: inline-block;
+}
+.color-preview-content{
+  width: 300px;
+  float: left;
+
+}
+.color-preview-footer{
+  clear:both;
+  color: #8A8A8A;
+  background: #272727 none repeat scroll 0% 0%;
+  height: 50px;
+}
+.color-preview-footer-credits{
+  background: #000 none repeat scroll 0% 0%;
+  padding: 5px;
+  color:#777
+}

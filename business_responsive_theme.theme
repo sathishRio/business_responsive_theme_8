@@ -1,0 +1,142 @@
+<?php
+/**
+ * Implements hook_html_head_alter().
+ * This will overwrite the default meta character type tag with HTML5 version.
+ */
+function business_responsive_theme_html_head_alter(&$head_elements) {
+  $head_elements['system_meta_content_type']['#attributes'] = array(
+    'charset' => 'utf-8'
+  );
+}
+
+/**
+ * Insert themed breadcrumb page navigation at top of the node content.
+ *
+ * Implements HOOk_preprocess_breadcrumb()
+ *
+ */
+function business_responsive_theme_preprocess_breadcrumb(&$variables) {
+  if(($node = \Drupal::routeMatch()->getParameter('node')) && $variables['breadcrumb']){
+    // Adding the a divider of between home an the title of the page.
+    $variables['breadcrumb'][] = array('text' => '»',);
+    // Adding the title of the page in the breadcrumb
+    $variables['breadcrumb'][] = array(
+      'text' => $node->getTitle(),
+      'url' => $node->URL()
+    );
+  }
+}
+
+/**
+ * Override or insert variables into the page template.
+ *
+ * Implements HOOK_preprocess_page()
+ *
+ */
+function business_responsive_theme_preprocess_page(&$vars) {
+
+  $vars['theme_path']=drupal_get_path('theme', 'business_responsive_theme');
+  $vars['site_name']=\Drupal::config('system.site')->get('name');
+  // Get Theme Setting
+  $vars['social_links']=theme_get_setting('social_links', 'business_responsive_theme');
+  $vars['facebook_username']=theme_get_setting('facebook_username', 'business_responsive_theme');
+  $vars['twitter_username']=theme_get_setting('twitter_username', 'business_responsive_theme');
+  $vars['breadcrumbs']=theme_get_setting('breadcrumbs', 'business_responsive_theme');
+  $vars['slideshow_js']=theme_get_setting('slideshow_js','business_responsive_theme');
+  //Get Menu Tree
+  $menu_tree = \Drupal::menuTree();
+  $parameters = $menu_tree->getCurrentRouteMenuTreeParameters('main');
+  $tree = $menu_tree->load('main', $parameters);
+  $vars['main_menu'] = $menu_tree->build($tree);
+  /**
+   * Add javascript files for jquery slideshow.
+   */
+  if ($vars['slideshow_js']):
+
+    $effect=theme_get_setting('effect','business_responsive_theme');
+    $animSpeed=theme_get_setting('animSpeed','business_responsive_theme');
+    $pauseTime=theme_get_setting('pauseTime','business_responsive_theme');
+    $slices=theme_get_setting('slices','business_responsive_theme');
+    $boxRows=theme_get_setting('boxRows','business_responsive_theme');
+    $boxCols=theme_get_setting('boxCols','business_responsive_theme');
+    $startSlide=theme_get_setting('startSlide','business_responsive_theme');
+    $controlNav=theme_get_setting('controlNav','business_responsive_theme');
+    $directionNav=theme_get_setting('directionNav','business_responsive_theme');
+    $randomStart=theme_get_setting('randomStart','business_responsive_theme');
+    $pauseOnHover=theme_get_setting('pauseOnHover','business_responsive_theme');
+    //ADD Drupal Setting
+    $vars['#attached']['drupalSettings'] = array(
+      'slider_setting'=>array(
+        'effect' =>$effect,
+        'animSpeed' =>$animSpeed,
+        'pauseTime'=>$pauseTime,
+        'slices' => $slices,
+        'boxRows' => $boxRows,
+        'boxCols' => $boxCols,
+        'startSlide' => $startSlide,
+        'controlNav' => $controlNav,
+        'directionNav' => $directionNav,
+        'randomStart' => $randomStart,
+        'pauseOnHover' =>$pauseOnHover,
+      ),
+  );
+  endif;
+  }
+
+/**
+ * Override or insert variables into the node template.
+ *
+ * Implements HOOK_preprocess_node()
+ *
+ */
+function business_responsive_theme_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  if ($variables['view_mode'] == 'full' && node_is_page($node)) {
+    $variables['classes_array'][] = 'node-full';
+  }
+}
+
+/**
+ * @param $page
+ *
+ * Implements HOOK_page_top()
+ *
+ */
+function business_responsive_theme_page_top($page) {
+  // <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  $viewport = array(
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => array(
+      'name' =>  'viewport',
+      'content' =>  'width=device-width'
+    )
+  );
+  drupal_add_html_head($viewport, 'viewport');
+}
+
+/**
+ * Implements HOOK_preprocess_html()
+ *
+ * Adds body classes if certain regions have content.
+ */
+function business_responsive_theme_preprocess_html(&$variables) {
+  // Add information about the number of sidebars.
+  if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
+    $variables['attributes']['class'][] = 'two-sidebars';
+  }
+  elseif (!empty($variables['page']['sidebar_first'])) {
+    $variables['attributes']['class'][] = 'one-sidebar';
+    $variables['attributes']['class'][] = 'sidebar-first';
+  }
+  elseif (!empty($variables['page']['sidebar_second'])) {
+    $variables['attributes']['class'][] = 'one-sidebar';
+    $variables['attributes']['class'][] = 'sidebar-second';
+  }
+  else {
+    $variables['attributes']['class'][] = 'no-sidebars';
+  }
+  if (!empty($variables['page']['featured_top'])) {
+    $variables['attributes']['class'][] = 'has-featured-top';
+  }
+}
